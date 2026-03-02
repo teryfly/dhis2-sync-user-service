@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Log output directory (relative to working directory) -->
+    <property name="LOG_PATH" value="./logs"/>
+
+    <!-- Shared log pattern -->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <!-- ======================== Console Appender ======================== -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- =================== Rolling File Appender ======================= -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/sync.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Daily rollover; one file per day -->
+            <fileNamePattern>${LOG_PATH}/sync-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Retain 15 days of log files -->
+            <maxHistory>15</maxHistory>
+            <!-- Cap total size of all retained files -->
+            <totalSizeCap>500MB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Package-level logger for application code -->
+    <logger name="com.dhis2sync" level="INFO"/>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

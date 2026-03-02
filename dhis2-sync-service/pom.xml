@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Spring Boot Parent -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- Project Coordinates -->
+    <groupId>com.dhis2sync</groupId>
+    <artifactId>dhis2-sync-service</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>dhis2-sync-service</name>
+    <description>DHIS2 Synchronisation Service</description>
+
+    <!-- Properties -->
+    <properties>
+        <java.version>19</java.version>
+    </properties>
+
+    <!-- Dependencies -->
+    <dependencies>
+        <!-- Spring JDBC — provides JdbcTemplate and HikariCP connection pool -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <!-- Spring Web — provides RestClient; embedded Tomcat disabled via application.yml -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- PostgreSQL Driver — compatible with GaussDB -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- spring-boot-starter-logging is pulled in transitively by the starters above -->
+    </dependencies>
+
+    <!-- Build Plugins -->
+    <build>
+        <plugins>
+            <!-- Produces executable Fat JAR -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
