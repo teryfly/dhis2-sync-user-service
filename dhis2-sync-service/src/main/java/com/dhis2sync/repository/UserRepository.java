@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * Repository for reading user records with their associated role codes
- * from the {@code users_ic_mj} and {@code user_rolejc_mj} tables.
+ * from the {@code users_jc_mj} and {@code user_role_jc_mj} tables.
  *
  * <p>Uses an inner JOIN so that users without any role assignment are
  * excluded — a user without roles cannot be meaningfully synced to DHIS2.</p>
@@ -54,8 +54,8 @@ public class UserRepository {
      */
     public List<UserWithRolesDTO> findAllUsersWithRoles() {
         String sql = "SELECT u.username, u.orgcode, u.id AS user_id, ur.role_id "
-                   + "FROM users_ic_mj u "
-                   + "JOIN user_rolejc_mj ur ON u.id = ur.user_id";
+                   + "FROM users_jc_mj u "
+                   + "JOIN user_role_jc_mj ur ON u.id = ur.user_id";
 
         // LinkedHashMap preserves insertion order for deterministic iteration
         Map<String, UserWithRolesDTO> userMap = new LinkedHashMap<>();
